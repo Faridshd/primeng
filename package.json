@@ -68,8 +68,6 @@
     "zone.js": "~0.11.4"
   },
   "dependencies": {
-    "dayjs": "^1.11.7",
-    "dayjs-jalali": "^0.0.2",
     "jalali-moment": "^3.3.11"
   }
 }

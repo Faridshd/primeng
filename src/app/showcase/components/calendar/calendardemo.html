@@ -13,97 +13,678 @@
     <div class="card">
         <h5>Popup</h5>
         <div class="p-fluid grid formgrid">
+            <!-- Basic Calender -->
             <div class="field col-12 md:col-4">
-                <label for="shamsi">Shamsi</label>
+                <label for="shamsi">Basic - Shamsi FA</label>
                 <p-calendar
-                    inputId="shamsi"
-                    [(ngModel)]="date1"
+                    inputId="shamsiFa"
+                    [(ngModel)]="date1Fa"
                     [isJalali]="true"
+                    [lang]="'fa'"
+                    [dir]="'rtl'"
                 ></p-calendar>
             </div>
 
-            <!-- <div class="field col-12 md:col-4">
-                <label for="basic">Basic</label>
-                <p-calendar inputId="basic" [(ngModel)]="date1" [isJalali]="false"></p-calendar>
+            <div class="field col-12 md:col-4">
+                <label for="shamsi">Basic - Shamsi EN</label>
+                <p-calendar
+                    inputId="shamsiEn"
+                    [(ngModel)]="date1En"
+                    [isJalali]="true"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
             </div>
 
             <div class="field col-12 md:col-4">
-                <label for="dateformat">DateFormat</label>
-                <p-calendar [(ngModel)]="date2" dateFormat="mm-dd-yy" inputId="dateformat"></p-calendar>
+                <label for="shamsi">Basic - Gregorian </label>
+                <p-calendar
+                    inputId="Miladi"
+                    [(ngModel)]="date1"
+                    [isJalali]="false"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+            <!-- Basic Calender -->
+
+            <!-- Calender With Date Format -->
+
+            <div class="field col-12 md:col-4">
+                <label for="dateformat">DateFormat - Shamsi FA</label>
+                <p-calendar
+                    [(ngModel)]="date2Fa"
+                    [isJalali]="true"
+                    [lang]="'fa'"
+                    [dir]="'rtl'"
+                    dateFormat="mm-dd-yy"
+                    inputId="dateformat"
+                ></p-calendar>
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="dateformat">DateFormat - Shamsi En</label>
+                <p-calendar
+                    [(ngModel)]="date2En"
+                    dateFormat="mm-dd-yy"
+                    inputId="dateformat"
+                    [isJalali]="true"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="dateformat">DateFormat - Gregorian</label>
+                <p-calendar
+                    [(ngModel)]="date2"
+                    dateFormat="mm-dd-yy"
+                    inputId="dateformat"
+                    [isJalali]="false"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+
+            <!-- Calender With Date Format -->
+
+            <!-- Calender With Icon -->
+
+            <div class="field col-12 md:col-4">
+                <label for="icon">Icon Shamsi - Fa</label>
+                <p-calendar
+                    [(ngModel)]="date3Fa"
+                    [showIcon]="true"
+                    inputId="icon"
+                    [isJalali]="true"
+                    [lang]="'fa'"
+                    [dir]="'rtl'"
+                ></p-calendar>
             </div>
 
             <div class="field col-12 md:col-4">
-                <label for="icon">Icon</label>
-                <p-calendar [(ngModel)]="date3" [showIcon]="true" inputId="icon"></p-calendar>
+                <label for="icon">Icon Shamsi - En</label>
+                <p-calendar
+                    [(ngModel)]="date3En"
+                    [showIcon]="true"
+                    inputId="icon"
+                    [isJalali]="true"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
             </div>
 
             <div class="field col-12 md:col-4">
-                <label for="min-max">MinMax</label>
-                <p-calendar [(ngModel)]="date4" [minDate]="minDate" [maxDate]="maxDate" [readonlyInput]="true" inputId="min-max"></p-calendar>
+                <label for="icon">Icon - Gregorian</label>
+                <p-calendar
+                    [(ngModel)]="date3"
+                    [showIcon]="true"
+                    inputId="icon"
+                    [isJalali]="false"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+
+            <!-- Calender With Icon -->
+
+            <!-- Calender With MinMax -->
+            <div class="field col-12 md:col-4">
+                <label for="min-max">MinMax - Shamsi Fa</label>
+                <p-calendar
+                    [(ngModel)]="date4Fa"
+                    [minDate]="minDate"
+                    [maxDate]="maxDate"
+                    [readonlyInput]="true"
+                    inputId="min-max"
+                    [isJalali]="true"
+                    [lang]="'fa'"
+                    [dir]="'rtl'"
+                ></p-calendar>
             </div>
 
             <div class="field col-12 md:col-4">
-                <label for="disabledays">Disabled Days</label>
-                <p-calendar [(ngModel)]="date5" [disabledDates]="invalidDates" [disabledDays]="[0,6]" [readonlyInput]="true" inputId="disabledays"></p-calendar>
+                <label for="min-max">MinMax - Shamsi En</label>
+                <p-calendar
+                    [(ngModel)]="date4En"
+                    [minDate]="minDate"
+                    [maxDate]="maxDate"
+                    [readonlyInput]="true"
+                    inputId="min-max"
+                    [isJalali]="true"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
             </div>
 
             <div class="field col-12 md:col-4">
-                <label for="multiple">Multiple</label>
-                <p-calendar [(ngModel)]="dates" selectionMode="multiple" [readonlyInput]="true" inputId="multiple"></p-calendar>
+                <label for="min-max">MinMax - Gregorian</label>
+                <p-calendar
+                    [(ngModel)]="date4"
+                    [minDate]="minDateEn"
+                    [maxDate]="maxDateEn"
+                    [readonlyInput]="true"
+                    inputId="min-max"
+                    [isJalali]="false"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+
+            <!-- Calender With MinMax -->
+
+            <!-- Disabled Days -->
+
+            <div class="field col-12 md:col-4">
+                <label for="disabledays">Disabled Days - Shmasi Fa</label>
+                <p-calendar
+                    [(ngModel)]="date5Fa"
+                    [disabledDates]="invalidDates"
+                    [disabledDays]="[0,6]"
+                    [readonlyInput]="true"
+                    inputId="disabledays"
+                    [isJalali]="true"
+                    [lang]="'fa'"
+                    [dir]="'rtl'"
+                ></p-calendar>
             </div>
 
             <div class="field col-12 md:col-4">
-                <label for="range">Range</label>
-                <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true" inputId="range"></p-calendar>
+                <label for="disabledays">Disabled Days - Shmasi En</label>
+                <p-calendar
+                    [(ngModel)]="date5En"
+                    [disabledDates]="invalidDates"
+                    [disabledDays]="[0,6]"
+                    [readonlyInput]="true"
+                    inputId="disabledays"
+                    [isJalali]="true"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
             </div>
 
             <div class="field col-12 md:col-4">
-                <label for="buttonbar">Button Bar</label>
-                <p-calendar [(ngModel)]="date6" showButtonBar="true" inputId="buttonbar"></p-calendar>
+                <label for="disabledays">Disabled Days - Gregorian</label>
+                <p-calendar
+                    [(ngModel)]="date5"
+                    [disabledDates]="invalidDatesEn"
+                    [disabledDays]="[0,6]"
+                    [readonlyInput]="true"
+                    inputId="disabledays"
+                    [isJalali]="false"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+
+            <!-- Disabled Days -->
+
+            <!-- Multiple Days -->
+
+            <div class="field col-12 md:col-4">
+                <label for="multiple">Multiple - Shamsi Fa</label>
+                <p-calendar
+                    [(ngModel)]="datesFa"
+                    selectionMode="multiple"
+                    [readonlyInput]="true"
+                    inputId="multiple"
+                    [isJalali]="true"
+                    [lang]="'fa'"
+                    [dir]="'rtl'"
+                ></p-calendar>
             </div>
 
             <div class="field col-12 md:col-4">
-                <label for="time">Time / 24h</label>
-                <p-calendar [(ngModel)]="date7" [showTime]="true" [showSeconds]="true" inputId="time"></p-calendar>
+                <label for="multiple">Multiple - Shamsi En</label>
+                <p-calendar
+                    [(ngModel)]="datesEn"
+                    selectionMode="multiple"
+                    [readonlyInput]="true"
+                    inputId="multiple"
+                    [isJalali]="true"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
             </div>
 
             <div class="field col-12 md:col-4">
-                <label for="timeonly">Time / 12h</label>
-                <p-calendar [(ngModel)]="date8" [timeOnly]="true" hourFormat="12" inputId="timeonly"></p-calendar>
+                <label for="multiple">Multiple - Gregorian</label>
+                <p-calendar
+                    [(ngModel)]="dates"
+                    selectionMode="multiple"
+                    [readonlyInput]="true"
+                    inputId="multiple"
+                    [isJalali]="false"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+
+            <!-- Multiple Days -->
+
+            <!-- Range Calender -->
+
+            <div class="field col-12 md:col-4">
+                <label for="range">Range - Shamsi Fa</label>
+                <p-calendar
+                    [(ngModel)]="rangeDatesFa"
+                    selectionMode="range"
+                    [readonlyInput]="true"
+                    inputId="range"
+                    [isJalali]="true"
+                    [lang]="'fa'"
+                    [dir]="'rtl'"
+                ></p-calendar>
             </div>
 
             <div class="field col-12 md:col-4">
-                <label for="monthpicker">Month Picker</label>
-                <p-calendar [(ngModel)]="date9" view="month" dateFormat="mm/yy" [readonlyInput]="true" inputId="monthpicker"></p-calendar>
+                <label for="range">Range - Shamsi En</label>
+                <p-calendar
+                    [(ngModel)]="rangeDatesEn"
+                    selectionMode="range"
+                    [readonlyInput]="true"
+                    inputId="range"
+                    [isJalali]="true"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
             </div>
 
             <div class="field col-12 md:col-4">
-                <label for="yearpicker">Year Picker</label>
-                <p-calendar [(ngModel)]="date10" view="year" dateFormat="yy" inputId="yearpicker"></p-calendar>
+                <label for="range">Range - Gregorian</label>
+                <p-calendar
+                    [(ngModel)]="rangeDates"
+                    selectionMode="range"
+                    [readonlyInput]="true"
+                    inputId="range"
+                    [isJalali]="false"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+
+            <!-- Range Calender -->
+
+            <!-- Button Bar Claender -->
+
+            <div class="field col-12 md:col-4">
+                <label for="buttonbar">Button Bar - Shamsi Fa</label>
+                <p-calendar
+                    [(ngModel)]="date6Fa"
+                    showButtonBar="true"
+                    inputId="buttonbar"
+                    [isJalali]="true"
+                    [lang]="'fa'"
+                    [dir]="'rtl'"
+                ></p-calendar>
             </div>
 
             <div class="field col-12 md:col-4">
-                <label for="multiplemonths">Multiple Months</label>
-                <p-calendar [(ngModel)]="date11" [numberOfMonths]="3" inputId="multiplemonths"></p-calendar>
+                <label for="buttonbar">Button Bar - Shamsi En</label>
+                <p-calendar
+                    [(ngModel)]="date6En"
+                    showButtonBar="true"
+                    inputId="buttonbar"
+                    [isJalali]="true"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
             </div>
 
             <div class="field col-12 md:col-4">
-                <label for="template">Date Template</label>
-                <p-calendar [(ngModel)]="date12" inputId="template">
+                <label for="buttonbar">Button Bar - Gregorian</label>
+                <p-calendar
+                    [(ngModel)]="date6"
+                    showButtonBar="true"
+                    inputId="buttonbar"
+                    [isJalali]="false"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+
+            <!-- Button Bar Claender -->
+
+            <!-- 24H Date/Time picker -->
+
+            <div class="field col-12 md:col-4">
+                <label for="time">Date/Time (Shamsi-Fa)</label>
+                <p-calendar
+                    [(ngModel)]="date7Fa"
+                    [showTime]="true"
+                    [showSeconds]="true"
+                    inputId="time"
+                    [isJalali]="true"
+                    [lang]="'fa'"
+                    [dir]="'rtl'"
+                ></p-calendar>
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <label for="time">Date/Time (Shamsi-En)</label>
+                <p-calendar
+                    [(ngModel)]="date7En"
+                    [showTime]="true"
+                    [showSeconds]="true"
+                    inputId="time"
+                    [isJalali]="true"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <label for="time">Date/Time (Gregorian)</label>
+                <p-calendar
+                    [(ngModel)]="date7"
+                    [showTime]="true"
+                    [showSeconds]="true"
+                    inputId="time"
+                    [isJalali]="false"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+
+            <!-- 24H Date/Time picker -->
+
+            <!-- 12H Time picker -->
+
+            <div class="field col-12 md:col-4">
+                <label for="timeonly">Time / 12h - Shamsi Fa</label>
+                <p-calendar
+                    [(ngModel)]="date8Fa"
+                    [timeOnly]="true"
+                    hourFormat="12"
+                    inputId="timeonly"
+                    [isJalali]="true"
+                    [lang]="'fa'"
+                    [dir]="'rtl'"
+                ></p-calendar>
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <label for="timeonly">Time / 12h - Shamsi En</label>
+                <p-calendar
+                    [(ngModel)]="date8En"
+                    [timeOnly]="true"
+                    hourFormat="12"
+                    inputId="timeonly"
+                    [isJalali]="true"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <label for="timeonly">Time / 12h - Gregorian</label>
+                <p-calendar
+                    [(ngModel)]="date8"
+                    [timeOnly]="true"
+                    hourFormat="12"
+                    inputId="timeonly"
+                    [isJalali]="false"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+
+            <!-- 12H Time picker -->
+
+            <!-- Month Picker -->
+
+            <div class="field col-12 md:col-4">
+                <label for="monthpicker">Month Picker - Shamsi Fa</label>
+                <p-calendar
+                    [(ngModel)]="date9Fa"
+                    view="month"
+                    dateFormat="mm/yy"
+                    [readonlyInput]="true"
+                    inputId="monthpicker"
+                    [isJalali]="true"
+                    [lang]="'fa'"
+                    [dir]="'rtl'"
+                ></p-calendar>
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="monthpicker">Month Picker - Shamsi En</label>
+                <p-calendar
+                    [(ngModel)]="date9En"
+                    view="month"
+                    dateFormat="mm/yy"
+                    [readonlyInput]="true"
+                    inputId="monthpicker"
+                    [isJalali]="true"
+                    [lang]="'en'"
+                    [dir]="'lte'"
+                ></p-calendar>
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="monthpicker">Month Picker - Georgian</label>
+                <p-calendar
+                    [(ngModel)]="date9"
+                    view="month"
+                    dateFormat="mm/yy"
+                    [readonlyInput]="true"
+                    inputId="monthpicker"
+                    [isJalali]="false"
+                    [lang]="'en'"
+                    [dir]="'lte'"
+                ></p-calendar>
+            </div>
+
+            <!-- Month Picker -->
+
+            <!-- Year Picker -->
+
+            <div class="field col-12 md:col-4">
+                <label for="yearpicker">Year Picker - Shamsi Fa</label>
+                <p-calendar
+                    [(ngModel)]="date10Fa"
+                    view="year"
+                    dateFormat="yy"
+                    inputId="yearpicker"
+                    [isJalali]="true"
+                    [lang]="'fa'"
+                    [dir]="'rtl'"
+                ></p-calendar>
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="yearpicker">Year Picker - Shamsi En</label>
+                <p-calendar
+                    [(ngModel)]="date10En"
+                    view="year"
+                    dateFormat="yy"
+                    inputId="yearpicker"
+                    [isJalali]="true"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+            <div class="field col-12 md:col-4">
+                <label for="yearpicker">Year Picker - Georgian</label>
+                <p-calendar
+                    [(ngModel)]="date10"
+                    view="year"
+                    dateFormat="yy"
+                    inputId="yearpicker"
+                    [isJalali]="false"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+
+            <!-- Year Picker -->
+
+            <!-- Multiple Months -->
+
+            <div class="field col-12 md:col-4">
+                <label for="multiplemonths">Multiple Months - Shamsi Fa</label>
+                <p-calendar
+                    [(ngModel)]="date11Fa"
+                    [numberOfMonths]="3"
+                    inputId="multiplemonths"
+                    [isJalali]="true"
+                    [lang]="'fa'"
+                    [dir]="'rtl'"
+                ></p-calendar>
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <label for="multiplemonths">Multiple Months - Shamsi En</label>
+                <p-calendar
+                    [(ngModel)]="date11En"
+                    [numberOfMonths]="3"
+                    inputId="multiplemonths"
+                    [isJalali]="true"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <label for="multiplemonths">Multiple Months - Georgian</label>
+                <p-calendar
+                    [(ngModel)]="date11"
+                    [numberOfMonths]="3"
+                    inputId="multiplemonths"
+                    [isJalali]="false"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+
+            <!-- Multiple Months -->
+
+            <!-- Date Template -->
+
+            <div class="field col-12 md:col-4">
+                <label for="template">Date Template - Shamsi Fa</label>
+                <p-calendar
+                    [(ngModel)]="date12Fa"
+                    [isJalali]="true"
+                    [lang]="'fa'"
+                    [dir]="'rtl'"
+                    inputId="template"
+                >
                     <ng-template pTemplate="date" let-date>
-                        <span [ngStyle]="{textDecoration: (date.day < 21 && date.day > 10) ? 'line-through' : 'inherit'}">{{date.day}}</span>
+                        <span
+                            [ngStyle]="{textDecoration: (date.day < 21 && date.day > 10) ? 'line-through' : 'inherit'}"
+                            >{{date.day}}</span
+                        >
                     </ng-template>
                 </p-calendar>
             </div>
 
             <div class="field col-12 md:col-4">
-                <label for="touchui">Touch UI</label>
-                <p-calendar [(ngModel)]="date13" [touchUI]="true" [readonlyInput]="true" inputId="touchui"></p-calendar>
-            </div> -->
+                <label for="template">Date Template - Shamsi En</label>
+                <p-calendar
+                    [(ngModel)]="date12En"
+                    [isJalali]="true"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                    inputId="template"
+                >
+                    <ng-template pTemplate="date" let-date>
+                        <span
+                            [ngStyle]="{textDecoration: (date.day < 21 && date.day > 10) ? 'line-through' : 'inherit'}"
+                            >{{date.day}}</span
+                        >
+                    </ng-template>
+                </p-calendar>
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <label for="template">Date Template - Georgian</label>
+                <p-calendar
+                    [(ngModel)]="date12"
+                    [isJalali]="false"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                    inputId="template"
+                >
+                    <ng-template pTemplate="date" let-date>
+                        <span
+                            [ngStyle]="{textDecoration: (date.day < 21 && date.day > 10) ? 'line-through' : 'inherit'}"
+                            >{{date.day}}</span
+                        >
+                    </ng-template>
+                </p-calendar>
+            </div>
+
+            <!-- Date Template -->
+
+            <!-- Touch UI -->
+
+            <div class="field col-12 md:col-4">
+                <label for="touchui">Touch UI - Shamsi Fa</label>
+                <p-calendar
+                    [(ngModel)]="date13Fa"
+                    [touchUI]="true"
+                    [readonlyInput]="true"
+                    inputId="touchui"
+                    [isJalali]="true"
+                    [lang]="'fa'"
+                    [dir]="'rtl'"
+                ></p-calendar>
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <label for="touchui">Touch UI - Shamsi En</label>
+                <p-calendar
+                    [(ngModel)]="date13En"
+                    [touchUI]="true"
+                    [readonlyInput]="true"
+                    inputId="touchui"
+                    [isJalali]="true"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+
+            <div class="field col-12 md:col-4">
+                <label for="touchui">Touch UI - Georgian</label>
+                <p-calendar
+                    [(ngModel)]="date13"
+                    [touchUI]="true"
+                    [readonlyInput]="true"
+                    inputId="touchui"
+                    [isJalali]="false"
+                    [lang]="'en'"
+                    [dir]="'ltr'"
+                ></p-calendar>
+            </div>
+
+            <!-- Touch UI -->
         </div>
 
-        <h5>Inline</h5>
-        <!-- <p-calendar [(ngModel)]="date14" [inline]="true" [showWeek]="true"></p-calendar> -->
+        <h5>Inline - Shamsi Fa</h5>
+        <p-calendar
+            [(ngModel)]="date14Fa"
+            [inline]="true"
+            [showWeek]="true"
+            [isJalali]="true"
+            [lang]="'fa'"
+            [dir]="'rtl'"
+        ></p-calendar>
+
+        <h5>Inline - Shamsi En</h5>
+        <p-calendar
+            [(ngModel)]="date14En"
+            [inline]="true"
+            [showWeek]="true"
+            [isJalali]="true"
+            [lang]="'en'"
+            [dir]="'ltr'"
+        ></p-calendar>
+
+        <h5>Inline - Georgian</h5>
+        <p-calendar
+            [(ngModel)]="date14"
+            [inline]="true"
+            [showWeek]="true"
+            [isJalali]="false"
+            [lang]="'en'"
+            [dir]="'ltr'"
+        ></p-calendar>
     </div>
 </div>
 

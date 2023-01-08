@@ -54,7 +54,7 @@ export type CalendarTypeView = 'date' | 'month' | 'year';
                 [@overlayAnimation]="touchUI ? {value: 'visibleTouchUI', params: {showTransitionParams: showTransitionOptions, hideTransitionParams: hideTransitionOptions}}:
                                             {value: 'visible', params: {showTransitionParams: showTransitionOptions, hideTransitionParams: hideTransitionOptions}}"
                                             [@.disabled]="inline === true" (@overlayAnimation.start)="onOverlayAnimationStart($event)" (@overlayAnimation.done)="onOverlayAnimationDone($event)" (click)="onOverlayClick($event)" *ngIf="inline || overlayVisible"
-                                            [dir]="isJalali == true ? 'rtl' : 'ltr' ">
+                                            [dir]="isJalali == true && lang == 'fa' ? 'rtl' : 'ltr' ">
                 <ng-content select="p-header"></ng-content>
                 <ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
                 <ng-container *ngIf="!timeOnly">
@@ -62,7 +62,7 @@ export type CalendarTypeView = 'date' | 'month' | 'year';
                         <div class="p-datepicker-group" *ngFor="let month of months; let i = index;">
                             <div class="p-datepicker-header">
                                 <button (keydown)="onContainerButtonKeydown($event)" class="p-datepicker-prev p-link" (click)="onPrevButtonClick($event)" *ngIf="i === 0" type="button" pRipple>
-                                    <span class="p-datepicker-prev-icon pi" [ngClass]="{ 'pi-chevron-left' : isJalali == false, 'pi-chevron-right' : isJalali == true}"></span>
+                                    <span class="p-datepicker-prev-icon pi" [ngClass]="{ 'pi-chevron-left' : lang == 'en', 'pi-chevron-right' : lang == 'fa'}"></span>
                                 </button>
                                 <div class="p-datepicker-title">
                                     <button type="button" (click)="switchToMonthView($event)" (keydown)="onContainerButtonKeydown($event)" *ngIf="currentView === 'date'" class="p-datepicker-month p-link" [disabled]="switchViewButtonDisabled()">
@@ -77,7 +77,7 @@ export type CalendarTypeView = 'date' | 'month' | 'year';
                                     </span>
                                 </div>
                                 <button (keydown)="onContainerButtonKeydown($event)" class="p-datepicker-next p-link" (click)="onNextButtonClick($event)" [style.display]="numberOfMonths === 1 ? 'inline-flex' : (i === numberOfMonths -1) ? 'inline-flex' : 'none'" type="button" pRipple>
-                                    <span class="p-datepicker-next-icon pi pi-chevron-right" [ngClass]="{ 'pi-chevron-right' : isJalali == false, 'pi-chevron-left' : isJalali == true}"></span>
+                                    <span class="p-datepicker-next-icon pi pi-chevron-right" [ngClass]="{ 'pi-chevron-right' : lang == 'en', 'pi-chevron-left' : lang == 'fa'}"></span>
                                 </button>
                             </div>
                             <div class="p-datepicker-calendar-container" *ngIf="currentView ==='date'">
@@ -125,7 +125,7 @@ export type CalendarTypeView = 'date' | 'month' | 'year';
                         </span>
                     </div>
                 </ng-container>
-                <div class="p-timepicker" *ngIf="(showTime||timeOnly) && currentView === 'date'">
+                <div class="p-timepicker" *ngIf="(showTime||timeOnly) && currentView === 'date'"  dir="ltr">
                     <div class="p-hour-picker">
                         <button class="p-link" type="button" (keydown)="onContainerButtonKeydown($event)" (keydown.enter)="incrementHour($event)" (keydown.space)="incrementHour($event)" (mousedown)="onTimePickerElementMouseDown($event, 0, 1)" (mouseup)="onTimePickerElementMouseUp($event)" (keyup.enter)="onTimePickerElementMouseUp($event)" (keyup.space)="onTimePickerElementMouseUp($event)" (mouseleave)="onTimePickerElementMouseLeave()" pRipple>
                             <span class="pi pi-chevron-up"></span>
@@ -218,6 +218,10 @@ export type CalendarTypeView = 'date' | 'month' | 'year';
 export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
 
     @Input() isJalali: boolean;
+
+    @Input() dir: string;
+
+    @Input() lang: string;
 
     @Input() style: any;
 
@@ -383,18 +387,14 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
     contentViewChild: ElementRef;
 
     dateMeta: any;
+
     selectedDate: Boolean = true;
+
     dates: moment.Moment[];
 
-    // months: any[];
-
-
-    // weekDays: string[];
     status: Boolean = true;
 
     value: any;
-
-    // dates: any[];
 
     months: any[];
 
@@ -499,13 +499,21 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
     preventFocus: boolean;
 
     @Input() InitialValue: string;
+
     invalidDates: Array<moment.Moment>;
+
     _minDate: moment.Moment;
+
     _maxDate: moment.Moment;
+
     _disabledDates: Array<moment.Moment>;
+
     datepickerClick: boolean;
+
     date: moment.Moment;
+
     rangeDates: moment.Moment[];
+
     calendarType: boolean = true;
 
     @Input() get view(): CalendarTypeView {
@@ -614,7 +622,6 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
     }
 
     get locale() {
-
         return this._locale;
     }
 
@@ -669,7 +676,6 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
     constructor(public el: ElementRef, public renderer: Renderer2, public cd: ChangeDetectorRef, private zone: NgZone, private config: PrimeNGConfig, public overlayService: OverlayService) { }
 
     ngOnInit() {
-
         if (this.isJalali) {
             this.calendarType = true;
         }
@@ -678,18 +684,35 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
         }
 
         if (this.calendarType) {
-            this._locale = {
-                firstDayOfWeek: 0,
-                dayNames: ["شنبه", "یکشنبه", "دوشنبه ", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"],
-                dayNamesShort: ["شنبه", "یکشنبه", "دوشنبه ", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"],
-                dayNamesMin: ["شنبه", "یکشنبه", "دوشنبه ", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"],
-                monthNames: ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"],
-                monthNamesShort: ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"],
-                today: 'امروز',
-                clear: 'پاک کردن',
-                dateFormat: 'yy/mm/dd',
+            if (this.lang === 'fa') {
+                this._locale = {
+                    firstDayOfWeek: 0,
+                    dayNames: ["شنبه", "یکشنبه", "دوشنبه ", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"],
+                    dayNamesShort: ["شنب", "یک", "دو ", "سه", "چهار", "پنج", "جمع"],
+                    dayNamesMin: ["شن", "یک", "دو ", "سه", "چه", "پن ", "جم"],
+                    monthNames: ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"],
+                    monthNamesShort: ["فرو", "ارد", "خرد", "تیر", "مرد", "شهر", "مهر", "آبان", "آذر", "دی", "بهم", "اسفن"],
+                    today: 'امروز',
+                    clear: 'پاک کردن',
+                    dateFormat: 'yy/mm/dd',
 
+                }
+                this.dir = 'rtl';
+            } else {
+                this._locale = {
+                    firstDayOfWeek: 0,
+                    dayNames: ["Shanbeh", "Yek Shanbeh", "Do Shanbeh", "Se Shanbeh", "Chahar Shanbeh", "Panj Shanbeh", "Jomeh"],
+                    dayNamesShort: ["Sha", "Yek", "Do ", "Se", "Cha", "Pan", "Jom"],
+                    dayNamesMin: ["Sh", "Ye", "Do ", "Se", "Ch", "Pa", "jo"],
+                    monthNames: ["Farvardin", "Ordibehesht", "Khordad", "Tir", "Mordad", "Sharivar", "Mehr", "Aban", "Azar", "Dey", "Bahman", "Esfand"],
+                    monthNamesShort: ["Far", "Ord", "Kho", "Tir", "Mor", "Sha", "Meh", "Aba", "Aza", "Dey", "Bah", "Esf"],
+                    today: 'Emrooz',
+                    clear: 'Pak kardan',
+                    dateFormat: 'yy/mm/dd',
+                }
+                this.dir = 'ltr';
             }
+
         }
         else {
             this._locale = {
@@ -782,7 +805,7 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
     }
 
     getTranslation(option: string) {
-        return this.config.getTranslation(option);
+        return this._locale[option];
     }
 
     populateYearOptions(start, end) {
@@ -794,10 +817,9 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
     }
 
     createWeekDays() {
-        debugger;
         this.weekDays = [];
         let dayIndex = this.getFirstDateOfWeek();
-        let dayLabels = this.calendarType == true ? this._locale.dayNames : this.getTranslation(TranslationKeys.DAY_NAMES_MIN)
+        let dayLabels = this._locale.dayNames;
         for (let i = 0; i < 7; i++) {
             this.weekDays.push(dayLabels[dayIndex]);
             dayIndex = (dayIndex == 6) ? 0 : ++dayIndex;
@@ -808,7 +830,7 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
         let monthPickerValues = [];
         for (let i = 0; i <= 11; i++) {
             // monthPickerValues.push(this.config.getTranslation('monthNamesShort')[i]);
-            monthPickerValues.push(this._locale.monthNamesShort[i]);
+            monthPickerValues.push(this._locale.monthNames[i]);
         }
         return monthPickerValues;
     }
@@ -1253,7 +1275,6 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
     // }
 
     selectDate(dateMeta) {
-
         // let date = moment([dateMeta.year, dateMeta.month, dateMeta.day]);
         let date = moment(dateMeta.year + '-' + (dateMeta.month + 1) + '-' + dateMeta.day, 'jYYYY-jM-jD').locale('fa');
         if (this.showTime) {
@@ -1421,6 +1442,7 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
     }
 
     isSelected(dateMeta): boolean {
+
         if (this.value) {
             if (this.isSingleSelection()) {
                 return this.isDateEquals(this.value, dateMeta);
@@ -1482,8 +1504,12 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
     }
 
     isDateEquals(value, dateMeta) {
-        if (value && value instanceof Date)
-            return value.getDate() === dateMeta.day && value.getMonth() === dateMeta.month && value.getFullYear() === dateMeta.year;
+        if (value) {
+            if (this.calendarType)
+                return value.jDate() === dateMeta.day && value.jMonth() === dateMeta.month && value.jYear() === dateMeta.year;
+            else
+            return value.date() === dateMeta.day && value.month() === dateMeta.month && value.year() === dateMeta.year;
+        }
         else
             return false;
     }
@@ -1618,18 +1644,16 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
                 }
             }
             else {
-                if (this.calendarType) {
-                    if (this.maxDate.year() < year) {
+                if (this.maxDate.year() < year) {
+                    validMax = false;
+                }
+                else if (this.maxDate.year() === year) {
+                    if (this.maxDate.month() < month) {
                         validMax = false;
                     }
-                    else if (this.maxDate.year() === year) {
-                        if (this.maxDate.month() < month) {
+                    else if (this.maxDate.month() === month) {
+                        if (this.maxDate.date() < day) {
                             validMax = false;
-                        }
-                        else if (this.maxDate.month() === month) {
-                            if (this.maxDate.date() < day) {
-                                validMax = false;
-                            }
                         }
                     }
                 }
@@ -2308,7 +2332,7 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
         if (this.isMultipleSelection()) {
             value = this.value[this.value.length - 1];
         }
-        const valueDateString = value ? value.toDateString() : null;
+        const valueDateString = value ? value.format('YYYY/MM/DD') : null;
         // if (this.minDate && valueDateString && this.minDate.toDateString() === valueDateString) {
         //     if (this.minDate.getHours() > convertedHour) {
         //         return false;
@@ -2372,6 +2396,7 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
                 }
             }
         }
+        return true;
     }
 
     incrementHour(event) {
@@ -2530,7 +2555,7 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
             value = this.value[this.value.length - 1];
         }
         // value = value ? new Date(value.getTime()) : new Date();
-        value = value ? moment(value.unix()) : moment();
+        value = value ? value : moment();
 
         if (this.hourFormat == '12') {
             if (this.currentHour === 12)
@@ -2742,7 +2767,8 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
     }
 
     isValidDate(date) {
-        return date instanceof Date && ObjectUtils.isNotEmpty(date);
+        // return date instanceof Date && ObjectUtils.isNotEmpty(date);
+        return ObjectUtils.isNotEmpty(date);
     }
 
     updateUI() {
@@ -2997,13 +3023,13 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
     }
 
     getDateFormat() {
-        debugger;
-        return this.dateFormat || this.getTranslation('dateFormat');
+        // return this.dateFormat || this.getTranslation('dateFormat');
+        return this.dateFormat || this._locale['dateFormat'];
     }
 
     getFirstDateOfWeek() {
-        debugger;
-        return this._firstDayOfWeek || this.getTranslation(TranslationKeys.FIRST_DAY_OF_WEEK);
+        // return this._firstDayOfWeek || this.getTranslation(TranslationKeys.FIRST_DAY_OF_WEEK);
+        return this._firstDayOfWeek || this._locale[TranslationKeys.FIRST_DAY_OF_WEEK];
     }
 
     // Ported from jquery-ui datepicker formatDate
