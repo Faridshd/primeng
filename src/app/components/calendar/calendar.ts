@@ -33,6 +33,7 @@ export interface LocaleSettings {
     clear?: string;
     dateFormat?: string;
     weekHeader?: string;
+    calenderType: string;
 }
 
 export type CalendarTypeView = 'date' | 'month' | 'year';
@@ -171,6 +172,7 @@ export type CalendarTypeView = 'date' | 'month' | 'year';
                 </div>
                 <div class="p-datepicker-buttonbar" *ngIf="showButtonBar">
                     <button type="button" [label]="getTranslation('today')" (keydown)="onContainerButtonKeydown($event)" (click)="onTodayButtonClick($event)" pButton pRipple [ngClass]="[todayButtonStyleClass]"></button>
+                    <button type="button" [label]="getTranslation('calenderType')" (keydown)="onContainerButtonKeydown($event)" (click)="onChangeCalender($event)" pButton pRipple [ngClass]="[todayButtonStyleClass]"></button>
                     <button type="button" [label]="getTranslation('clear')" (keydown)="onContainerButtonKeydown($event)" (click)="onClearButtonClick($event)" pButton pRipple [ngClass]="[clearButtonStyleClass]"></button>
                 </div>
                 <ng-content select="p-footer"></ng-content>
@@ -695,6 +697,7 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
                     today: 'امروز',
                     clear: 'پاک کردن',
                     dateFormat: 'yy/mm/dd',
+                    calenderType: 'میلادی'
 
                 }
                 this.dir = 'rtl';
@@ -709,6 +712,7 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
                     today: 'Emrooz',
                     clear: 'Pak kardan',
                     dateFormat: 'yy/mm/dd',
+                    calenderType: 'Miladi'
                 }
                 this.dir = 'ltr';
             }
@@ -724,7 +728,8 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
                 monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                 today: 'Today',
                 clear: 'Clear',
-                dateFormat: 'yy/mm/dd'
+                dateFormat: 'yy/mm/dd',
+                calenderType: 'Shamsi'
             };
 
         }
@@ -3292,6 +3297,94 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
         this.restoreOverlayAppend();
         this.onOverlayHide();
     }
+
+    onChangeCalender() {
+        if(this.calendarType) {
+            this.dir = 'ltr';
+        } else {
+            this.dir = 'ltr';
+        }
+        this.calendarType = !this.calendarType;
+        if (this.calendarType) {
+            if (this.lang === 'fa') {
+                this._locale = {
+                    firstDayOfWeek: 0,
+                    dayNames: ["شنبه", "یکشنبه", "دوشنبه ", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"],
+                    dayNamesShort: ["شنب", "یک", "دو ", "سه", "چهار", "پنج", "جمع"],
+                    dayNamesMin: ["شن", "یک", "دو ", "سه", "چه", "پن ", "جم"],
+                    monthNames: ["فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"],
+                    monthNamesShort: ["فرو", "ارد", "خرد", "تیر", "مرد", "شهر", "مهر", "آبان", "آذر", "دی", "بهم", "اسفن"],
+                    today: 'امروز',
+                    clear: 'پاک کردن',
+                    dateFormat: 'yy/mm/dd',
+                    calenderType: 'میلادی'
+
+                }
+                this.dir = 'rtl';
+            } else {
+                this._locale = {
+                    firstDayOfWeek: 0,
+                    dayNames: ["Shanbeh", "Yek Shanbeh", "Do Shanbeh", "Se Shanbeh", "Chahar Shanbeh", "Panj Shanbeh", "Jomeh"],
+                    dayNamesShort: ["Sha", "Yek", "Do ", "Se", "Cha", "Pan", "Jom"],
+                    dayNamesMin: ["Sh", "Ye", "Do ", "Se", "Ch", "Pa", "jo"],
+                    monthNames: ["Farvardin", "Ordibehesht", "Khordad", "Tir", "Mordad", "Sharivar", "Mehr", "Aban", "Azar", "Dey", "Bahman", "Esfand"],
+                    monthNamesShort: ["Far", "Ord", "Kho", "Tir", "Mor", "Sha", "Meh", "Aba", "Aza", "Dey", "Bah", "Esf"],
+                    today: 'Emrooz',
+                    clear: 'Pak kardan',
+                    dateFormat: 'yy/mm/dd',
+                    calenderType: 'Miladi'
+                }
+                this.dir = 'ltr';
+            }
+
+        }
+        else {
+            this._locale = {
+                firstDayOfWeek: 0,
+                dayNames: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+                dayNamesMin: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+                monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                monthNamesShort: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                today: 'Today',
+                clear: 'Clear',
+                dateFormat: 'yy/mm/dd',
+                calenderType: 'Shamsi'
+            };
+
+        }
+
+        this.attributeSelector = UniqueComponentId();
+        const date = moment(this.InitialValue) || moment();
+        this.createResponsiveStyle();
+
+        if (this.calendarType) {
+            this.currentMonth = date.jMonth();
+            this.currentYear = date.jYear();
+        }
+        else {
+            this.currentMonth = date.month();
+            this.currentYear = date.year();
+        }
+        this.currentView = this.view;
+
+        if (this.view === 'date') {
+            this.createWeekDays();
+            this.initTime(date);
+            this.createMonths(this.currentMonth, this.currentYear);
+            this.ticksTo1970 = (((1970 - 1) * 365 + Math.floor(1970 / 4) - Math.floor(1970 / 100) + Math.floor(1970 / 400)) * 24 * 60 * 60 * 10000000);
+        }
+        else if (this.view === 'month') {
+            this.monthPickerValues();
+        }
+
+        this.translationSubscription = this.config.translationObserver.subscribe(() => {
+            this.createWeekDays();
+        });
+
+        this.initialized = true;
+    }
+
 }
 
 @NgModule({
