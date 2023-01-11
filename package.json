@@ -69,6 +69,7 @@
   },
   "dependencies": {
     "dayjs": "^1.11.7",
-    "jalali-dayjs": "^0.0.1"
+    "jalali-dayjs": "^0.0.1",
+    "shamsi": "^1.1.6"
   }
 }
