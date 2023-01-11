@@ -3331,7 +3331,6 @@ export class Calendar implements OnInit, OnDestroy, ControlValueAccessor {
     }
 
     onChangeCalender() {
-        debugger;
         if(this.calendarType) {
             this.dir = 'ltr';
         } else {
